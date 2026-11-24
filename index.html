@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UniSwap Đà Nẵng</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1F5EF;--sf:#fff;--ink:#13261B;--mu:#587063;--ln:#D6E0D8;--br:#1E5B3F;--bi:#fff;--so:#DDEFE2;--co:#F2B632;--bad:#B3402F;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1912;--sf:#16251C;--ink:#E8F1EA;--mu:#9BB0A2;--ln:#26392D;--br:#58C08A;--bi:#0B1F14;--so:#1D3527;--bad:#F08A78;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1912;--sf:#16251C;--ink:#E8F1EA;--mu:#9BB0A2;--ln:#26392D;--br:#58C08A;--bi:#0B1F14;--so:#1D3527;--bad:#F08A78;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "Be Vietnam Pro",system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}h1,h2,h3,p{margin:0}
+:focus-visible{outline:3px solid var(--co);outline-offset:2px}
+.mu{color:var(--mu)}.err{color:var(--bad);min-height:1.4em;font-size:14px}
+.auth{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr}
+.hero{background:var(--br);color:var(--bi);padding:56px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+.hero h1{font-size:clamp(30px,4vw,46px);line-height:1.15;font-weight:800;max-width:15em}
+.hero ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{border:1.5px solid currentColor;border-radius:99px;padding:3px 12px;font-size:13px}
+.logo{font-weight:800;font-size:20px}
+.panel{padding:40px 28px;display:flex;align-items:center;justify-content:center}
+.card{width:100%;max-width:400px;display:grid;gap:16px}
+form{display:grid;gap:12px}label{display:grid;gap:4px;font-weight:500;font-size:14px}
+input,select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--ln);border-radius:10px;background:var(--sf)}
+.otp{font-size:26px;letter-spacing:.5em;text-align:center;font-weight:700}
+.btn{border:0;background:var(--br);color:var(--bi);padding:12px 18px;border-radius:12px;font-weight:700;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:not-allowed}.btn.ghost{background:var(--so);color:var(--ink)}.full{width:100%}.big{padding:16px;font-size:17px}
+.lk{background:none;border:0;color:var(--br);font-weight:700;text-decoration:underline;cursor:pointer;padding:4px}
+summary.lk{display:inline-block}
+.demo{background:var(--so);border-radius:10px;padding:10px 12px;font-size:14px}
+.alt{text-align:center;font-size:14px}
+.top{max-width:520px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.pill{background:var(--co);color:#3A2A00;font-weight:700;border-radius:99px;padding:4px 12px;font-size:14px}
+main.app{max-width:520px;margin:0 auto;padding:4px 16px 110px;display:grid;gap:16px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--sf);border-top:1px solid var(--ln);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:4px}
+.bar button{flex:1;max-width:120px;border:0;background:none;padding:8px 2px;border-radius:10px;font-size:13px;font-weight:600;color:var(--mu);cursor:pointer}
+.bar [aria-current=true]{background:var(--so);color:var(--ink)}
+.dot{background:var(--bad);color:#fff;border-radius:99px;padding:0 7px;font-size:12px;margin-left:4px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row select{flex:1;min-width:130px}
+.tag{position:relative;background:var(--sf);border:2px solid var(--ln);border-radius:22px;margin-top:18px;overflow:hidden}
+.tag::before{content:"";position:absolute;top:10px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--bg);border:2px solid var(--ln);z-index:1}
+.art{height:230px;display:grid;place-items:center;font-size:92px}
+.tb{padding:14px 18px 18px;display:grid;gap:4px}.tb h3{font-size:20px}
+.want{background:var(--so);border-radius:8px;padding:6px 10px;font-weight:500;margin-top:6px}
+.acts{display:grid;grid-template-columns:1fr 2fr;gap:10px}
+.box{background:var(--sf);border:1.5px solid var(--ln);border-radius:16px;padding:14px;display:grid;gap:8px}
+.li{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.it{border:2px solid var(--ln);border-radius:14px;background:var(--sf);padding:0;cursor:pointer;text-align:left;overflow:hidden}
+.it[aria-pressed=true]{border-color:var(--br);box-shadow:0 0 0 2px var(--br)}
+.it .art{height:100px;font-size:46px}.it div:last-child{padding:8px 10px;font-size:13px}
+.swap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;text-align:center}
+.swap .art{height:110px;font-size:50px;border-radius:14px}
+.th{width:64px;flex:none}.th .art{height:64px;font-size:30px;border-radius:10px}.ev .art{height:100px;font-size:46px;border-radius:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats b{font-size:28px;line-height:1.1}
+.stars{display:flex;gap:2px}.stars button{background:none;border:0;font-size:34px;cursor:pointer;color:var(--co);padding:2px}
+.msgs{display:grid;gap:8px}
+.chh{display:flex;align-items:center;gap:12px}.chh p{font-size:13px}
+.av{width:40px;height:40px;border-radius:50%;background:var(--br);color:var(--bi);display:grid;place-items:center;font-weight:800;flex:none}
+.dotg{width:8px;height:8px;border-radius:50%;background:#3DBE7A;display:inline-block;margin-right:6px}
+.pin{display:flex;align-items:center;gap:10px;background:var(--so);border-radius:14px;padding:10px}.pin .th{width:44px}.pin .th .art{height:44px;font-size:22px;border-radius:8px}.pin div:last-child{min-width:0}
+.day{text-align:center;font-size:12px;color:var(--mu)}
+.ml{display:flex;gap:8px;align-items:flex-end}.ml .av{width:28px;height:28px;font-size:13px}.mr{display:flex;justify-content:flex-end}
+.b{max-width:78%;padding:9px 14px;border-radius:18px 18px 18px 4px;background:var(--sf);border:1px solid var(--ln)}
+.b.me{border:0;background:var(--br);color:var(--bi);border-radius:18px 18px 4px 18px}
+.comp{position:sticky;bottom:calc(62px + env(safe-area-inset-bottom,0px));background:var(--bg);padding:8px 0;display:grid;gap:8px}
+.chips2{display:flex;gap:8px;overflow-x:auto}.chips2 button{white-space:nowrap;border:1.5px solid var(--ln);background:var(--sf);border-radius:99px;padding:6px 14px;cursor:pointer;font-weight:500}
+.comp form{display:flex;gap:8px;align-items:center}.comp input{border-radius:99px;padding:12px 18px}
+.send{width:46px;height:46px;border-radius:50%;border:0;background:var(--br);color:var(--bi);font-size:18px;cursor:pointer;flex:none}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;max-width:90%;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9;text-align:center}
+.toast.on{opacity:1}
+.hero.lt{background:linear-gradient(160deg,var(--so),var(--bg));color:var(--ink)}.hero.lt h1{font-size:clamp(26px,3vw,36px)}.rack{font-size:44px;letter-spacing:6px}
+.tp{align-items:flex-start}.tc{width:100%;max-width:620px;display:grid;gap:14px}
+details.pol{background:var(--sf);border:1.5px solid var(--ln);border-radius:16px}
+details.pol>summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:center;padding:14px}
+details.pol>summary::-webkit-details-marker{display:none}
+.pi{width:44px;height:44px;border-radius:12px;background:var(--so);display:grid;place-items:center;font-size:22px;flex:none}
+.chev{color:var(--mu);transition:transform .2s}details[open] .chev{transform:rotate(180deg)}
+.pb{padding:0 16px 16px;max-height:340px;overflow:auto;font-size:14px}.pb h4{margin:14px 0 4px;font-size:15px}.pb ol,.pb ul{margin:4px 0 8px;padding-left:22px}.pb p{margin:4px 0}
+.cb{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14.5px}.cb input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--br)}
+@media(max-width:800px){.auth{grid-template-columns:1fr}.hero{padding:32px 20px}.panel{padding:28px 16px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><div id="app"></div><div id="toast" class="toast" role="status"></div>
+<script>
+const SC=["Đại học Kinh tế","Đại học Bách khoa","Đại học Ngoại ngữ","Đại học Sư phạm","Đại học Duy Tân","Viện Nghiên cứu và Đào tạo Việt – Anh, Đại học Đà Nẵng (VNUK)"];
+const AR=["Làng Đại học","Hòa Khánh","Ngũ Hành Sơn","Hải Châu"];
+const SZ=["XS","S","M","L","XL","XXL","Free size","36","37","38","39","40","41","42","43"];
+const CAT={"👔":"Áo","👕":"Áo","🧶":"Áo","👖":"Quần","🩳":"Quần","👗":"Váy/đầm","🧥":"Áo khoác","👟":"Giày","👜":"Phụ kiện"};
+const P=[
+[1,"Linh",0,"4.9",2,[["Áo sơ mi trắng","👔","#E3EEE6","M","Mới 90%","Áo khoác jean"],["Chân váy xếp ly","👗","#F3E1E8","S","Mới 85%","Hoodie"],["Túi tote vải","👜","#F5E9CC","Free size","Mới 80%","Sneaker"]]],
+[2,"Minh",5,"4.8",3,[["Hoodie xám","🧥","#DDE5EE","L","Mới 90%","Áo thun oversize"],["Quần jean ống rộng","👖","#D3DDF0","M","Mới 85%","Áo sơ mi"]]],
+[3,"Hà",2,"5.0",0,[["Đầm hoa nhí","👗","#F7E0D6","S","Mới 95%","Áo len"],["Áo len kem","🧶","#EFE8D8","M","Mới 80%","Quần culottes"]]],
+[4,"Khoa",1,"4.7",1,[["Áo thun in hình","👕","#E1EEDD","L","Mới 85%","Quần short"],["Giày canvas","👟","#E8E4F2","42","Mới 75%","Balo"]]],
+[5,"An",3,"4.9",0,[["Áo khoác gió","🧥","#D9ECEA","M","Mới 90%","Áo polo"]]],
+[6,"Phúc",4,"4.6",3,[["Quần short kaki","🩳","#F0E6D2","M","Mới 85%","Áo thun"]]]
+].map(([id,name,s,r,a,it])=>({id,name,school:SC[s],r,area:AR[a],items:it.map(([n,e,c,z,q,w],i)=>({id:id+"-"+i,n,e,c,s:z,q,w,p:id,st:'show'}))}));
+const REW=[[100,"Voucher 10.000đ tại quán cà phê đối tác"],[200,"Túi vải Canvas UniSwap hoặc voucher 30.000đ đồ secondhand"],[300,"Bình nước tre/thép không gỉ hoặc combo ăn uống"]];
+const EV=[["Ngày hội Đổi đồ trực tiếp (Campus Swap Fair)","12/12/2026, 8:00–11:30","Sảnh trường Đại học (địa điểm cụ thể sẽ cập nhật)","Mang đồ cũ đến đổi trực tiếp, thử size và gặp bạn bè yêu thời trang bền vững. Mở cho sinh viên các trường tại Đà Nẵng.",1,"🔄","#DDEFE2"],
+["Chiến dịch quyên góp “Áo ấm vùng cao”","01/12/2026 – 15/01/2027","Thùng quyên góp tại sảnh KTX và văn phòng Đoàn trường","Quyên góp quần áo ấm hoặc đồ còn dùng tốt chưa tìm được người đổi. Đồ được phân loại, giặt sạch và gửi tặng trẻ em vùng cao.",1,"🧣","#F5E9CC"],
+["Workshop sống xanh: biến áo cũ thành túi tote","05/11/2026, 14:00","Thư viện trường","Hướng dẫn tái chế áo cũ thành túi tote cùng CLB Môi trường.",0,"👜","#E3EEE6"]];
+const T1=[
+["Điều 1. Giới thiệu và phạm vi áp dụng","p",["UniSwap Đà Nẵng là nền tảng kết nối sinh viên nhằm trao đổi quần áo đã qua sử dụng, khuyến khích tái sử dụng, giảm lãng phí và xây dựng cộng đồng thời trang bền vững.","Khi đăng ký tài khoản và sử dụng UniSwap, người dùng xác nhận đã đọc, hiểu và đồng ý tuân thủ các điều khoản được công bố."]],
+["Điều 2. Điều kiện đăng ký tài khoản","o",["Người dùng phải là sinh viên thuộc cơ sở đào tạo được UniSwap hỗ trợ.","Người dùng phải cung cấp thông tin chính xác, bao gồm họ tên, trường học, mã số sinh viên và email trường.","Người dùng phải hoàn tất quy trình xác minh tài khoản theo hướng dẫn của hệ thống.","Mỗi người dùng chỉ được duy trì một tài khoản cá nhân, trừ trường hợp được Ban quản trị cho phép.","Người dùng chịu trách nhiệm bảo mật thông tin đăng nhập.","Nghiêm cấm giả mạo danh tính, sử dụng thông tin sinh viên của người khác hoặc tạo tài khoản nhằm gian lận."]],
+["Điều 3. Quy định đăng tải quần áo","o",["Mỗi bài đăng chỉ được giới thiệu một món đồ.","Người đăng phải cung cấp từ 2–4 hình ảnh thực tế của sản phẩm.","Thông tin sản phẩm phải bao gồm tên, danh mục, kích cỡ, tình trạng, mô tả và loại đồ mong muốn nhận đổi.","Quần áo phải được vệ sinh phù hợp và còn khả năng sử dụng.","Người đăng phải mô tả trung thực các khuyết điểm, vết bẩn hoặc hư hỏng đáng kể.","Không đăng hàng hóa bất hợp pháp, hàng giả, đồ không thuộc quyền trao đổi hợp pháp của mình hoặc sản phẩm vi phạm quyền sở hữu trí tuệ.","Ban quản trị có quyền kiểm duyệt, ẩn hoặc gỡ bỏ nội dung vi phạm."]],
+["Điều 4. Nguyên tắc trao đổi quần áo","o",["UniSwap áp dụng nguyên tắc trao đổi một món đồ lấy một món đồ (1:1).","Giao dịch chỉ được hình thành khi cả hai bên cùng đồng ý với cặp sản phẩm trao đổi.","Không hỗ trợ trao đổi theo combo hoặc nhiều món lấy một món.","Không được yêu cầu thanh toán, chuyển khoản, đặt cọc hoặc trả khoản chênh lệch trong quy trình trao đổi của UniSwap.","Chức năng trò chuyện giữa hai bên được mở sau khi cả hai đồng ý trao đổi.","Mỗi bên có quyền từ chối nhận món đồ không đúng mô tả hoặc không đáp ứng điều kiện đã thống nhất."]],
+["Điều 5. Gặp mặt và hoàn tất giao dịch","o",["Hai bên tự thống nhất thời gian và địa điểm trao đổi.","Khuyến khích lựa chọn nơi công cộng, đủ ánh sáng và có người qua lại như sảnh trường, thư viện hoặc căng-tin.","Người dùng có quyền dừng giao dịch khi cảm thấy không an toàn.","Hai bên có trách nhiệm kiểm tra sản phẩm trước khi xác nhận hoàn tất.","Giao dịch chỉ được hệ thống ghi nhận hoàn tất khi cả hai bên xác nhận trao đổi thành công.","Nghiêm cấm xác nhận giao dịch giả nhằm nhận Điểm Xanh."]],
+["Điều 6. Đánh giá sau giao dịch","o",["Sau khi hoàn tất giao dịch, người dùng có thể đánh giá đối phương từ 1–5 sao và gửi nhận xét.","Đánh giá phải phản ánh trải nghiệm thực tế.","Không được đăng đánh giá giả, xúc phạm, đe dọa hoặc tiết lộ thông tin cá nhân của người khác.","Ban quản trị có thể xem xét và xử lý các đánh giá vi phạm."]],
+["Điều 7. Điểm Xanh và chương trình quyền lợi","o",["Điểm Xanh là hệ thống ghi nhận và khuyến khích hoạt động trao đổi bền vững.","Mỗi giao dịch hợp lệ có thể mang lại 50 Điểm Xanh cho mỗi bên sau khi cả hai xác nhận hoàn tất.","Hệ thống phân biệt Tổng Điểm Xanh tích lũy và Điểm Đổi Quà khả dụng.","Hai tài khoản chỉ được tính điểm thưởng cho tối đa một giao dịch trao đổi với nhau mỗi tháng.","Điểm Xanh không phải tiền và không được chuyển nhượng hoặc quy đổi thành tiền mặt.","Hệ thống có quyền kiểm tra, điều chỉnh hoặc thu hồi điểm phát sinh từ hành vi gian lận.","Voucher, quà tặng, giấy chứng nhận và điểm rèn luyện chỉ được áp dụng khi chương trình đã được xác nhận và công bố chính thức."]],
+["Điều 8. Các hành vi bị nghiêm cấm","u",["!Người dùng không được:","Lừa đảo, quấy rối, đe dọa hoặc phân biệt đối xử.","Đăng nội dung trái pháp luật hoặc không phù hợp với cộng đồng sinh viên.","Giả mạo danh tính, giao dịch hoặc đánh giá.","Thu thập và sử dụng trái phép thông tin cá nhân của người khác.","Phát tán đường dẫn độc hại, spam hoặc can thiệp trái phép vào hệ thống.","Lợi dụng nền tảng để mua bán thương mại trái với nguyên tắc trao đổi không dùng tiền.","Thông đồng nhằm trục lợi từ Điểm Xanh hoặc chương trình quà tặng."]],
+["Điều 9. Xử lý vi phạm và tranh chấp","p",["UniSwap có thể áp dụng biện pháp cảnh báo, hạn chế chức năng, ẩn nội dung hoặc đình chỉ tài khoản khi có căn cứ xác định hành vi vi phạm.","Người dùng có quyền gửi báo cáo, cung cấp bằng chứng và yêu cầu xem xét lại quyết định xử lý.","UniSwap hỗ trợ tiếp nhận và xem xét phản ánh trong phạm vi vận hành nền tảng. UniSwap không trực tiếp giữ, vận chuyển hoặc kiểm định từng món đồ, nhưng vẫn thực hiện các trách nhiệm bắt buộc theo pháp luật áp dụng."]],
+["Điều 10. Thay đổi điều khoản và chấm dứt sử dụng","p",["UniSwap có thể cập nhật điều khoản để phù hợp với hoạt động của nền tảng và quy định pháp luật.","Các thay đổi quan trọng sẽ được thông báo trước khi áp dụng. Khi cần thiết, hệ thống sẽ yêu cầu người dùng xác nhận lại.","Người dùng có quyền ngừng sử dụng và yêu cầu xóa tài khoản theo quy trình được công bố."]]];
+const T2=[
+["Điều 1. Thông tin được thu thập","u",["!UniSwap dự kiến thu thập những nhóm dữ liệu sau:","#1. Thông tin tài khoản","Họ và tên.","Trường hoặc đơn vị đào tạo.","Mã số sinh viên.","Email trường.","Thông tin xác minh tài khoản.","#2. Thông tin bảo mật","Mật khẩu được lưu dưới dạng mã băm bảo mật.","Thông tin phiên đăng nhập.","Nhật ký bảo mật cần thiết.","#3. Thông tin sản phẩm","Hình ảnh quần áo.","Danh mục, kích cỡ và tình trạng sản phẩm.","Nội dung mô tả sản phẩm.","#4. Thông tin hoạt động","Lịch sử yêu cầu trao đổi.","Trạng thái giao dịch.","Tin nhắn và đánh giá.","Điểm Xanh và lịch sử đổi quà.","#5. Thông tin kỹ thuật","Thông tin thiết bị và trình duyệt cần thiết.","Dữ liệu phục vụ bảo mật và vận hành hệ thống."]],
+["Điều 2. Mục đích xử lý dữ liệu","o",["!UniSwap sử dụng thông tin nhằm:","Đăng ký, xác minh và quản lý tài khoản.","Kết nối sinh viên có nhu cầu trao đổi quần áo.","Hỗ trợ trò chuyện, xác nhận giao dịch và xử lý phản ánh.","Quản lý Điểm Xanh và ngăn chặn gian lận.","Cải thiện chất lượng dịch vụ và bảo mật.","Phối hợp với nhà trường hoặc đối tác trong các chương trình được triển khai hợp lệ."]],
+["Điều 3. Phạm vi hiển thị thông tin","p",["Người dùng khác có thể xem tên hiển thị, trường học, sản phẩm đăng tải, điểm đánh giá và nhận xét công khai phù hợp.","Mã số sinh viên, email đăng nhập, mật khẩu và dữ liệu xác minh không được hiển thị công khai.","Tin nhắn riêng chỉ được truy cập bởi các bên có quyền hợp lệ hoặc được xử lý trong những trường hợp cần thiết theo chính sách và pháp luật."]],
+["Điều 4. Chia sẻ dữ liệu","p",["UniSwap không bán dữ liệu cá nhân của người dùng.","Dữ liệu chỉ được chia sẻ trong phạm vi cần thiết với nhà cung cấp hạ tầng, đơn vị hỗ trợ vận hành hoặc đối tác thực hiện chương trình, trên cơ sở phù hợp với mục đích đã thông báo và quy định pháp luật.","Dữ liệu phục vụ đối soát điểm rèn luyện chỉ được chuyển cho nhà trường khi chương trình đã được chấp thuận và có căn cứ xử lý dữ liệu hợp lệ."]],
+["Điều 5. Bảo mật thông tin","u",["!UniSwap dự kiến áp dụng các biện pháp bảo vệ dữ liệu như:","Mã băm mật khẩu.","Xác minh email.","Kiểm soát quyền truy cập.","Bảo vệ phiên đăng nhập.","Giới hạn truy cập dữ liệu cá nhân.","Theo dõi và xử lý sự cố bảo mật.","!Không hệ thống trực tuyến nào có thể bảo đảm loại bỏ hoàn toàn mọi rủi ro bảo mật."]],
+["Điều 6. Quyền của người dùng","o",["!Trong phạm vi pháp luật áp dụng, người dùng có quyền:","Được biết dữ liệu cá nhân nào đang được xử lý và mục đích xử lý.","Yêu cầu truy cập và chỉnh sửa thông tin.","Yêu cầu xóa dữ liệu hoặc tài khoản.","Rút lại sự đồng ý đối với hoạt động xử lý dữ liệu dựa trên sự đồng ý.","Phản đối hoặc yêu cầu hạn chế xử lý dữ liệu trong những trường hợp pháp luật cho phép.","Gửi phản ánh hoặc khiếu nại liên quan đến quyền riêng tư.","!Việc rút lại sự đồng ý hoặc yêu cầu xóa dữ liệu có thể ảnh hưởng đến khả năng sử dụng những chức năng cần dữ liệu đó."]],
+["Điều 7. Lưu trữ và xóa dữ liệu","p",["UniSwap chỉ lưu giữ dữ liệu trong thời gian cần thiết cho mục đích xử lý đã công bố hoặc theo nghĩa vụ pháp luật.","Khi người dùng yêu cầu xóa tài khoản, dữ liệu sẽ được xóa, ẩn danh hoặc lưu giữ có giới hạn tùy theo căn cứ pháp lý và nghĩa vụ cần thiết.","Thời hạn lưu trữ cụ thể của từng nhóm dữ liệu phải được công bố trước khi triển khai chính thức."]],
+["Điều 8. Cập nhật chính sách","p",["Khi có thay đổi đáng kể về mục đích hoặc phạm vi xử lý dữ liệu, UniSwap sẽ thông báo và thực hiện việc xin lại sự đồng ý nếu pháp luật yêu cầu.","Người dùng có thể xem chính sách trong quá trình đăng ký và tại phần cài đặt tài khoản."]]];
+const T3=[
+["Điều 1. Tôn trọng cộng đồng","p",["Mọi thành viên phải giao tiếp lịch sự, trung thực và tôn trọng quyền riêng tư của người khác.","Nghiêm cấm quấy rối, đe dọa, xúc phạm hoặc lợi dụng chức năng trò chuyện để gửi nội dung không liên quan đến giao dịch."]],
+["Điều 2. Tiêu chuẩn quần áo","o",["Chỉ đăng những món đồ thuộc quyền sở hữu hoặc quyền định đoạt hợp pháp của mình.","Quần áo phải được vệ sinh phù hợp và còn khả năng sử dụng.","Người đăng phải mô tả trung thực tình trạng sản phẩm.","Phải thông báo rõ các vết bẩn, hư hỏng hoặc khuyết điểm đáng kể.","Không đăng sản phẩm có nguy cơ gây hại cho sức khỏe hoặc không được phép trao đổi.","Hình ảnh phải phản ánh đúng món đồ được đăng."]],
+["Điều 3. Trao đổi công bằng","o",["Tuân thủ nguyên tắc trao đổi 1:1.","Không yêu cầu thanh toán hoặc đặt cọc.","Không trao đổi theo combo.","Hai bên có quyền hỏi thêm thông tin và kiểm tra tình trạng sản phẩm.","Không ép buộc hoặc gây áp lực để người khác chấp nhận giao dịch."]],
+["Điều 4. Gặp mặt an toàn","o",["Ưu tiên gặp tại địa điểm công cộng, đủ ánh sáng và có người qua lại.","Không bắt buộc cung cấp địa chỉ nhà, số điện thoại cá nhân hoặc thông tin riêng tư không cần thiết.","Kiểm tra sản phẩm trực tiếp trước khi xác nhận giao dịch.","Có quyền dừng cuộc gặp nếu cảm thấy không an toàn.","Sử dụng chức năng báo cáo khi phát hiện hành vi đáng ngờ."]],
+["Điều 5. Đánh giá trung thực","o",["Chỉ đánh giá sau khi giao dịch hoàn tất.","Không tạo đánh giá giả.","Không đe dọa để yêu cầu đánh giá tích cực.","Không công khai thông tin cá nhân của người khác trong nhận xét."]],
+["Điều 6. Sử dụng Điểm Xanh minh bạch","o",["Không tạo giao dịch giả.","Không sử dụng nhiều tài khoản nhằm trục lợi.","Không thông đồng với người khác để nhận điểm không hợp lệ.","Điểm phát sinh từ hành vi gian lận có thể bị kiểm tra, điều chỉnh hoặc thu hồi."]],
+["Điều 7. Báo cáo vi phạm","u",["!Người dùng có thể báo cáo:","Sản phẩm vi phạm.","Tin nhắn không phù hợp.","Tài khoản giả mạo.","Hành vi quấy rối hoặc lừa đảo.","Giao dịch có dấu hiệu gian lận.","!Ban quản trị xem xét nội dung báo cáo, áp dụng biện pháp phù hợp và cho phép người bị xử lý gửi yêu cầu xem xét lại."]],
+["Điều 8. Tham gia sự kiện cộng đồng","p",["Người tham gia Ngày hội Đổi đồ hoặc các chiến dịch quyên góp phải tuân thủ nội quy của ban tổ chức và địa điểm tổ chức.","Điểm thưởng từ sự kiện chỉ được ghi nhận sau khi hoạt động tham gia hoặc đóng góp được xác minh hợp lệ."]]];
+const POL=[["📄","Điều khoản sử dụng","Quy định về quyền, nghĩa vụ và trách nhiệm khi sử dụng UniSwap.",T1],["🛡️","Chính sách quyền riêng tư","Cách chúng tôi thu thập, sử dụng và bảo vệ thông tin cá nhân của bạn.",T2],["👥","Quy định cộng đồng &amp; trao đổi an toàn","Quy tắc ứng xử, tiêu chuẩn quần áo, nguyên tắc trao đổi và gặp mặt an toàn.",T3]];
+const body=(k,it)=>{let h='',o=0;const cl=()=>{if(o){h+=k==='o'?'</ol>':'</ul>';o=0}};
+ for(const x of it){if(x[0]==='#'){cl();h+=`<p><b>${x.slice(1)}</b></p>`}else if(x[0]==='!'){cl();h+=`<p>${x.slice(1)}</p>`}else if(k==='p'){h+=`<p>${x}</p>`}else{if(!o){h+=k==='o'?'<ol>':'<ul>';o=1}h+=`<li>${x}</li>`}}cl();return h};
+const acc=()=>POL.map(([i,t,d,a])=>`<details class="pol"><summary><span class="pi">${i}</span><span style="flex:1"><b>${t}</b><br><span class="mu">${d}</span></span><span class="chev">⌄</span></summary><div class="pb">${a.map(([h,k,it])=>`<h4>${h}</h4>`+body(k,it)).join('')}</div></details>`).join('');
+const $=s=>document.querySelector(s),app=$('#app'),mem={};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function load(k,d){try{const v=localStorage.getItem(k);if(v!==null)return JSON.parse(v)}catch(e){}return mem[k]??d}
+function save(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+let users=load('us3_users',[]),tt;
+if(!Array.isArray(users))users=[];
+users.forEach(u=>{u.rv=u.rv||[];u.pairs=u.pairs||{};u.ev=u.ev||[];u.sw=u.sw||0;u.items=u.items||[];u.items.forEach(i=>{i.st=i.st||'show';i.ph=i.ph||[]})});
+const S={user:users.find(u=>u.email===load('us3_sess',null)),view:'feed',fi:0,fs:'',fa:'',fc:'',fz:'',fq:'',req:[{p:1},{p:2}],cur:null,sel:'',mine:'',sw:null,chat:[],rt:0};
+const A={pg:'welcome',step:'form',p:null,code:''};
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),4200)}
+const err=m=>{const e=$('#err');if(e)e.textContent=m};
+const otp=()=>String(100000+Math.floor(Math.random()*900000));
+const persist=()=>save('us3_users',users);
+const art=i=>i.ph&&i.ph[0]?`<div class="art" role="img" aria-label="${esc(i.n)}" style="background:${i.c} url('${i.ph[0]}') center/cover"></div>`:`<div class="art" style="background:${i.c}" aria-hidden="true">${i.e}</div>`;
+const shrink=f=>new Promise((ok,no)=>{const r=new FileReader();r.onerror=no;r.onload=()=>{const im=new Image();im.onerror=no;im.onload=()=>{const k=Math.min(1,480/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',.7))};im.src=r.result};r.readAsDataURL(f)});
+const pp=id=>P.find(p=>p.id===id),allItems=()=>P.flatMap(p=>p.items);
+const opts=(a,v)=>a.map(s=>`<option ${v===s?'selected':''}>${s}</option>`).join('');
+const avg=u=>u.rv.length?(u.rv.reduce((a,x)=>a+x.s,0)/u.rv.length).toFixed(1):'Chưa có';
+
+function auth(){
+ const g=(p,t)=>`<button class="lk" data-a="pg" data-v="${p}">${t}</button>`,pw=`<label>Mật khẩu (từ 6 ký tự)<input name="pw" type="password" autocomplete="new-password" required></label><label>Xác nhận mật khẩu<input name="pw2" type="password" autocomplete="new-password" required></label>`,
+ em=`<label>Gmail do trường cấp<input name="email" type="email" autocomplete="email" placeholder="ten.sinhvien@gmail.com" required></label>`,er=`<p class="err" id="err" role="alert"></p>`;
+ if(A.pg==='terms'&&A.step==='form')return terms();
+ let b;
+ if(A.step==='otp')b=`<h2>Xác minh email</h2><p class="mu">Mã 6 số đã gửi đến <b>${esc(A.p.email)}</b>.</p><p class="demo">Bản thử nghiệm chưa gửi email thật. Mã của bạn: <b>${A.code}</b></p>
+ <form data-f="otp"><label>Mã OTP<input name="o" class="otp" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required></label>${er}<button class="btn full">Xác nhận</button></form>
+ <p class="alt"><button class="lk" data-a="resend">Gửi lại mã</button><button class="lk" data-a="back">Đổi email</button></p>`;
+ else if(A.pg==='welcome')b=`<h2>Chào mừng bạn đến UniSwap</h2><p class="mu">Chọn một trong hai để vào website.</p><button class="btn big full" data-a="pg" data-v="login">Đăng nhập</button><button class="btn ghost big full" data-a="pg" data-v="reg">Đăng ký</button>`;
+ else if(A.pg==='reg')b=`<h2>Đăng ký tài khoản</h2><form data-f="reg"><label>Họ và tên<input name="name" autocomplete="name" required></label><label>Trường / đơn vị đào tạo<select name="school" required>${opts(SC)}</select></label><label>MSSV<input name="mssv" required></label>${em}${pw}${er}<button class="btn full">Gửi mã xác minh</button></form><p class="alt mu">Đã có tài khoản? ${g('login','Đăng nhập')}</p><p class="alt">${g('welcome','← Trang chào mừng')}</p>`;
+ else if(A.pg==='forgot')b=`<h2>Quên mật khẩu</h2><form data-f="forgot">${em}<label>Mật khẩu mới (từ 6 ký tự)<input name="pw" type="password" autocomplete="new-password" required></label><label>Xác nhận mật khẩu mới<input name="pw2" type="password" autocomplete="new-password" required></label>${er}<button class="btn full">Gửi mã xác minh</button></form><p class="alt">${g('login','← Quay lại Đăng nhập')}</p>`;
+ else b=`<h2>Đăng nhập</h2><form data-f="login">${em.replace('autocomplete="email"','autocomplete="username"')}<label>Mật khẩu<input name="pw" type="password" autocomplete="current-password" required></label>${er}<button class="btn full">Đăng nhập</button></form><p class="alt">${g('forgot','Quên mật khẩu?')}</p><p class="alt mu">Chưa có tài khoản? ${g('reg','Đăng ký')}</p><p class="alt">${g('welcome','← Trang chào mừng')}</p>`;
+ return `<main class="auth"><section class="hero"><div class="logo">UniSwap Đà Nẵng</div><h1>Đổi đồ cho nhau, làm mới tủ đồ mà không tốn một đồng.</h1>
+ <ul><li>Không đặt cọc, không thu phí giao dịch</li><li>Trao đổi 1:1: một món đổi đúng một món</li><li>Chỉ mở chat khi hai bên cùng xác nhận</li></ul>
+ <div class="chips">${SC.map(s=>`<span>${s}</span>`).join('')}</div></section><section class="panel"><div class="card">${b}</div></section></main>`;
+}
+
+function terms(){
+ const op=(i,t)=>`<button type="button" class="lk" data-a="op" data-i="${i}">${t}</button>`;
+ return `<main class="auth"><section class="hero lt"><div class="logo" style="display:flex;align-items:center;gap:10px"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 14c0-3 3-4 3-7a3 3 0 1 0-6 0"/><path d="M22 14 4 28h28"/><path d="M26 38c0-9 6-13 14-13 0 9-5 15-14 13z" fill="#58C08A"/></svg><span>UniSwap<br>Đà Nẵng</span></div>
+ <h1>Cùng trao đổi, làm mới tủ đồ, sống xanh hơn ♻️</h1><p class="mu">Nền tảng trao đổi quần áo dành riêng cho sinh viên Đà Nẵng, hướng đến thời trang tuần hoàn và lối sống bền vững.</p><div class="rack" aria-hidden="true">👕👚🧥🧺🪴</div></section>
+ <section class="panel tp"><div class="tc"><h2>Điều khoản &amp; Chính sách sử dụng</h2><p class="mu">Trước khi tạo tài khoản, vui lòng đọc và đồng ý với các điều khoản dưới đây để tiếp tục. Phiên bản: Dự thảo 1.0.</p>${acc()}
+ <hr style="border:0;border-top:1px solid var(--ln);width:100%">
+ <label class="cb"><input type="checkbox" data-t="0"><span>Tôi đã đọc và đồng ý với ${op(0,'Điều khoản sử dụng')} và ${op(2,'Quy định cộng đồng')}.</span></label>
+ <label class="cb"><input type="checkbox" data-t="1"><span>Tôi đã đọc ${op(1,'Chính sách quyền riêng tư')} và đồng ý với các hoạt động xử lý dữ liệu cá nhân cần sự đồng ý để tạo và sử dụng tài khoản.</span></label>
+ <label class="cb"><input type="checkbox" data-t="2"><span>Tôi muốn nhận thông báo về sự kiện, chương trình quà tặng và hoạt động cộng đồng qua email. <span class="mu">(Không bắt buộc)</span></span></label>
+ <button class="btn big full" id="go" data-a="agree" disabled>Đồng ý và tiếp tục →</button><p class="alt"><button class="lk" data-a="pg" data-v="welcome">← Trang chào mừng</button></p></div></section></main>`;
+}
+function policy(){const c=S.user.consent;return `<div class="li"><h2>Điều khoản &amp; Chính sách</h2><button class="btn ghost" data-a="tab" data-v="profile">Quay lại</button></div><p class="mu">Phiên bản: Dự thảo 1.0${c?` · Bạn đã đồng ý lúc ${new Date(c.at).toLocaleString('vi-VN')}`:''}</p>${acc()}`}
+const flt=()=>allItems().filter(i=>{const p=pp(i.p);return(!S.fs||p.school===S.fs)&&(!S.fa||p.area===S.fa)&&(!S.fc||CAT[i.e]===S.fc)&&(!S.fz||i.s===S.fz)&&(!S.fq||(i.n+' '+i.w).toLowerCase().includes(S.fq.toLowerCase()))});
+function feed(){
+ const l=flt(),it=l[S.fi],sizes=[...new Set(allItems().map(i=>i.s))];
+ const f=`<form data-f="search" class="row" style="flex-wrap:nowrap"><input name="q" value="${esc(S.fq)}" placeholder="Tìm tên món hoặc món đang tìm đổi" aria-label="Tìm kiếm"><button class="btn">Tìm</button></form>
+ <div class="row"><select data-f="fs" aria-label="Trường"><option value="">Tất cả trường</option>${opts(SC,S.fs)}</select><select data-f="fa" aria-label="Khu vực"><option value="">Mọi khu vực</option>${opts(AR,S.fa)}</select>
+ <select data-f="fc" aria-label="Loại đồ"><option value="">Mọi loại đồ</option>${opts([...new Set(Object.values(CAT))],S.fc)}</select><select data-f="fz" aria-label="Size"><option value="">Mọi size</option>${opts(sizes,S.fz)}</select></div>`;
+ if(!it)return f+`<div class="box"><h2>Không còn món phù hợp</h2><p class="mu">Thử đổi bộ lọc hoặc xem lại từ đầu.</p><button class="btn" data-a="again">Xem lại từ đầu</button></div>`;
+ const p=pp(it.p);
+ return f+`<article class="tag">${art(it)}<div class="tb"><h3>${it.n}</h3><p class="mu">${CAT[it.e]} · Size ${it.s} · ${it.q}</p><p class="want">Đang tìm đổi: ${it.w}</p><p class="mu">${p.name} · ${p.school} · ${p.area} · ★ ${p.r}</p></div></article>
+ <div class="acts"><button class="btn ghost" data-a="skip">✕ Bỏ qua</button><button class="btn" data-a="want">Muốn trao đổi</button></div>`;
+}
+function inbox(){
+ const mi=S.user.items.find(i=>i.st==='show');
+ if(!mi)return `<div class="box"><h2>Chưa có yêu cầu</h2><p class="mu">Yêu cầu trao đổi được gửi cho một món đồ bạn đã đăng. Hãy đăng món đồ để bắt đầu nhận yêu cầu.</p><button class="btn" data-a="tab" data-v="add">Đăng món đồ</button></div>`;
+ if(!S.req.length)return `<div class="box"><h2>Chưa có yêu cầu mới</h2><p class="mu">Khi có bạn muốn đổi đồ với bạn, yêu cầu sẽ hiện ở đây.</p></div>`;
+ return `<h2>Yêu cầu trao đổi</h2>`+S.req.map(r=>{const p=pp(r.p);return `<div class="box"><div class="row" style="flex-wrap:nowrap;align-items:center"><div class="th">${art(mi)}</div><div><b>${p.name}</b> · ★ ${p.r}<p class="mu">${p.school}</p><p>Muốn đổi lấy món <b>${esc(mi.n)}</b> của bạn</p></div></div><button class="btn" data-a="open" data-id="${p.id}" data-m="${mi.id}">Xem tủ đồ</button></div>`}).join('');
+}
+function review(){
+ const p=S.cur,mine=S.user.items.find(i=>i.id===S.mine);
+ if(!p||!mine)return inbox();
+ return `<h2>Yêu cầu từ ${p.name}</h2><p class="mu">${p.school} · ★ ${p.r}. Nguyên tắc: 1 món đổi 1 món, không gộp nhiều món.</p>
+ <h3>Món ${p.name} muốn đổi lấy của bạn</h3><div class="box row" style="flex-wrap:nowrap;align-items:center"><div class="th">${art(mine)}</div><div><b>${esc(mine.n)}</b><p class="mu">Size ${esc(mine.s)} · ${esc(mine.q)}</p></div></div>
+ <h3>Chọn 1 món của ${p.name} để đổi lấy</h3><div class="grid">${p.items.map(i=>`<button class="it" data-a="pickt" data-id="${i.id}" aria-pressed="${S.sel===i.id}">${art(i)}<div><b>${esc(i.n)}</b><br>Size ${esc(i.s)} · ${esc(i.q)}</div></button>`).join('')}</div>
+ <div class="acts"><button class="btn ghost" data-a="decline">Từ chối</button><button class="btn" data-a="accept" ${S.sel?'':'disabled'}>Chấp nhận trao đổi 1:1</button></div>`;
+}
+function match(){
+ const w=S.sw;
+ return `<div class="box" style="text-align:center"><h2>It’s a Swap!</h2><p class="mu">1 món đổi 1 món · cả hai bên đã xác nhận</p><div class="swap"><div>${art(w.mine)}<p>${esc(w.mine.n)}</p></div><b>⇄</b><div>${art(w.theirs)}<p>${w.theirs.n}</p></div></div>
+ <button class="btn full" data-a="tochat">Nhắn tin hẹn điểm gặp</button></div>`;
+}
+function chat(){
+ const w=S.sw,av=n=>`<span class="av">${esc(n[0])}</span>`;
+ return `<div class="chh">${av(w.p.name)}<div><b>${w.p.name}</b><p class="mu"><span class="dotg"></span>${w.p.school}</p></div></div>
+ <div class="box"><div class="pin"><div class="th">${art(w.mine)}</div><b>⇄</b><div class="th">${art(w.theirs)}</div><div><b>1 món đổi 1 món</b><p class="mu">${esc(w.mine.n)} ⇄ ${w.theirs.n}</p></div></div>
+ <button class="btn ${w.st?'ghost':''}" data-a="done" ${w.st?'disabled':''}>${w.st==='wait'?`Đang chờ ${w.p.name} xác nhận…`:'Xác nhận đã hoàn tất trao đổi'}</button></div>
+ <p class="day">Hôm nay</p>
+ <div class="msgs">${S.chat.map(m=>m.me?`<div class="mr"><div class="b me">${esc(m.t)}</div></div>`:`<div class="ml">${av(w.p.name)}<div class="b">${esc(m.t)}</div></div>`).join('')}</div>
+ <div class="comp"><div class="chips2">${["Sảnh trường","Thư viện","Căng-tin"].map(x=>`<button data-a="loc" data-v="${x}">📍 ${x}</button>`).join('')}</div>
+ <form data-f="chat"><input name="t" placeholder="Nhập tin nhắn…" aria-label="Tin nhắn" autocomplete="off" required><button class="send" aria-label="Gửi">➤</button></form></div>`;
+}
+function rate(){
+ const w=S.sw,s=S.rt;
+ return `<div class="box"><h2>Đánh giá ${w.p.name}</h2><p class="mu">Món đồ có đúng mô tả không? Thái độ và việc đúng hẹn thế nào?</p>
+ <div class="stars" role="group" aria-label="Số sao">${[1,2,3,4,5].map(n=>`<button type="button" data-a="star" data-v="${n}" aria-pressed="${n<=s}" aria-label="${n} sao">${n<=s?'★':'☆'}</button>`).join('')}</div>
+ <form data-f="rate"><label>Nhận xét ngắn<input name="t" maxlength="120"></label><p class="err" id="err" role="alert"></p><button class="btn full">Gửi đánh giá (+5 Điểm Xanh)</button></form></div>`;
+}
+const row=(i,del)=>`<div class="box li"><div class="row" style="flex-wrap:nowrap;align-items:center"><div class="th">${art(i)}</div><div><b>${esc(i.n)}</b><p class="mu">${CAT[i.e]||''} · Size ${esc(i.s)} · ${esc(i.q)}<br>Tìm đổi: ${esc(i.w)}</p></div></div>${del?`<button class="lk" data-a="del" data-id="${i.id}">Gỡ</button>`:''}</div>`;
+function closet(){
+ const u=S.user,G=[['show','Đang hiển thị'],['pend','Đang chờ trao đổi'],['done','Đã trao đổi']];
+ return `<div class="li"><h2>Tủ đồ của tôi</h2><button class="btn" data-a="tab" data-v="add">Đăng món đồ</button></div>`+
+ (u.items.length?G.map(([k,t])=>{const l=u.items.filter(i=>i.st===k);return `<h3>${t} (${l.length})</h3>`+(l.length?l.map(i=>row(i,k==='show')).join(''):`<p class="mu">Chưa có món nào.</p>`)}).join(''):`<div class="box"><p class="mu">Tủ đồ đang trống. Đăng món đầu tiên để bắt đầu trao đổi.</p></div>`);
+}
+function add(){
+ return `<h2>Đăng món đồ</h2><p class="mu">Mỗi bài đăng chỉ cho một món đồ.</p>
+ <form data-f="add" class="box"><label>Tải ảnh lên (tối đa 4 ảnh, không bắt buộc)<input name="ph" id="ph" type="file" accept="image/*" multiple></label><div class="row" id="prev"></div>
+ <label>Tên món đồ<input name="n" required></label>
+ <div class="row"><label style="flex:1">Danh mục<select name="e"><option value="👕">Áo</option><option value="👖">Quần</option><option value="👗">Váy/đầm</option><option value="🧥">Áo khoác</option><option value="👟">Giày</option><option value="👜">Phụ kiện</option></select></label>
+ <label style="flex:1">Size (chọn gợi ý hoặc tự nhập)<input name="s" list="sizes" autocomplete="off" required></label></div><datalist id="sizes">${SZ.map(s=>`<option value="${s}">`).join('')}</datalist>
+ <label>Độ mới<input name="q" placeholder="VD: Mới 90%, đã mặc 2 lần" required></label>
+ <label>Mô tả<textarea name="d" rows="2" maxlength="200"></textarea></label><label>Món đồ mong muốn nhận đổi<input name="w" required></label>
+ <p class="err" id="err" role="alert"></p><div class="acts" style="grid-template-columns:1fr 2fr"><button type="button" class="btn ghost" data-a="tab" data-v="closet">Hủy</button><button class="btn">Đăng lên tủ đồ</button></div></form>`;
+}
+function events(){
+ const ev=S.user.ev,card=(x,i)=>{const[t,w,l,d,up,e,c]=x,r=ev.includes(i);return `<div class="box ev">${art({e,c})}<h3>${t}</h3><p class="mu">🕒 ${w}<br>📍 ${l}</p><p>${d}</p>`+(up?`<button class="btn ${r?'ghost':''}" data-a="evreg" data-i="${i}">${r?'Hủy đăng ký':'Đăng ký tham gia'}</button>`:`<details><summary class="lk">Xem chi tiết</summary><p class="mu">Sự kiện đã diễn ra. Ảnh và tổng kết hoạt động sẽ được cập nhật tại đây.</p></details>`)+`</div>`};
+ return `<h2>Sự kiện</h2><p class="demo">Thời gian và địa điểm dưới đây là dữ liệu mẫu cho prototype. Điểm Xanh được ghi nhận sau khi ban tổ chức xác nhận.</p><h3>Sắp diễn ra</h3>${EV.map((x,i)=>x[4]?card(x,i):'').join('')}<h3>Đã diễn ra</h3>${EV.map((x,i)=>x[4]?'':card(x,i)).join('')}`;
+}
+function profile(){
+ const u=S.user,t=u.total;
+ return `<div class="box"><h2>${esc(u.name)}</h2><p class="mu">${esc(u.school)}<br>MSSV ${esc(u.mssv)} · ${esc(u.email)}</p></div>
+ <div class="stats"><div class="box"><span class="mu">Số món đã trao đổi</span><b>${u.sw}</b></div><div class="box"><span class="mu">Đánh giá trung bình</span><b>${avg(u)}</b></div>
+ <div class="box"><span class="mu">Tổng Điểm Xanh (xét rèn luyện)</span><b>${t}</b></div><div class="box"><span class="mu">Điểm Đổi Quà (khả dụng)</span><b>${u.bal}</b></div></div>
+ <p class="mu">${t>=300?'Đạt mốc +5 điểm rèn luyện và Giấy chứng nhận Đại sứ Thời trang Bền vững.':t>=150?'Đạt mốc +3 điểm rèn luyện. Còn '+(300-t)+' điểm để lên mốc +5.':'Còn '+(150-t)+' điểm để đạt mốc +3 điểm rèn luyện.'}</p>
+ ${u.rv.length?`<h3>Nhận xét gần đây</h3>`+u.rv.slice(-3).map(x=>`<div class="box">★ ${x.s} · ${esc(x.n)}<br>${esc(x.t)}</div>`).join(''):''}
+ <h2>Đổi quà</h2>${REW.map(([c,n])=>`<div class="box li"><div><b>${c} điểm</b><p class="mu">${n}</p></div><button class="btn" data-a="redeem" data-c="${c}" ${u.bal<c?'disabled':''}>Đổi</button></div>`).join('')}
+ <button class="btn ghost" data-a="tab" data-v="policy">Điều khoản &amp; Chính sách</button>
+ <button class="btn ghost" data-a="out">Đăng xuất</button>`;
+}
+function shell(){
+ const V={feed,inbox,review,match,chat,rate,closet,add,events,profile,policy}[S.view]||feed,tab={feed:'feed',closet:'closet',add:'closet',events:'events',profile:'profile',policy:'profile'}[S.view]||'inbox';
+ const nav=[['feed','Lướt đồ'],['inbox','Yêu cầu'],['closet','Tủ đồ'],['events','Sự kiện'],['profile','Hồ sơ']].map(([k,n])=>`<button data-a="tab" data-v="${k}" ${tab===k?'aria-current="true"':''}>${n}${k==='inbox'&&S.req.length&&S.user.items.some(i=>i.st==='show')?`<span class="dot">${S.req.length}</span>`:''}</button>`).join('');
+ return `<header class="top"><span class="logo">UniSwap</span><span class="pill">🌿 ${S.user.bal} điểm</span></header><main class="app">${V()}</main><nav class="bar" aria-label="Điều hướng">${nav}</nav>`;
+}
+function render(){
+ try{app.innerHTML=S.user?shell():auth();window.scrollTo(0,S.user&&S.view==='chat'?document.body.scrollHeight:0)}
+ catch(e){console.error(e);app.innerHTML=`<div class="panel"><div class="card"><h2>Có lỗi xảy ra</h2><p class="mu">Bấm nút bên dưới để đặt lại dữ liệu và thử lại.</p><button class="btn full" data-a="reset">Đặt lại dữ liệu</button></div></div>`}
+}
+
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-a]');if(!b)return;
+ const a=b.dataset.a,v=b.dataset.v,u=S.user;
+ if(a==='op'){const d=document.querySelectorAll('details.pol')[+b.dataset.i];d.open=true;d.scrollIntoView({block:'center'});return}
+ else if(a==='agree'){const c=[...document.querySelectorAll('[data-t]')];if(!(c[0].checked&&c[1].checked))return;A.agree={v:'Dự thảo 1.0',at:Date.now(),mk:c[2].checked};A.pg='reg';A.step='form'}
+ else if(a==='reset'){users=[];persist();save('us3_sess',null);S.user=null;S.view='feed';S.req=[{p:1},{p:2}];A.pg='welcome';A.step='form'}
+ else if(a==='pg'){A.pg=v==='reg'&&!A.agree?'terms':v;A.step='form'}
+ else if(a==='resend'){A.code=otp();toast('Đã gửi lại mã mới')}
+ else if(a==='back'){A.step='form'}
+ else if(a==='tab')S.view=v;
+ else if(a==='skip')S.fi++;
+ else if(a==='again')S.fi=0;
+ else if(a==='want'){const it=flt()[S.fi],p=pp(it.p);
+  if(!u.items.some(i=>i.st==='show')){toast('Hãy đăng ít nhất 1 món đồ trước khi gửi yêu cầu.');S.view='add'}
+  else{toast(`Đã gửi yêu cầu đến ${p.name}. Chat chỉ mở khi hai bên xác nhận trao đổi 1:1.`);S.fi++}}
+ else if(a==='open'){S.cur=pp(+b.dataset.id);S.sel='';S.mine=b.dataset.m;S.view='review'}
+ else if(a==='pickt')S.sel=b.dataset.id;
+ else if(a==='decline'){S.req=S.req.filter(x=>x.p!==S.cur.id);S.view='inbox';toast('Đã từ chối yêu cầu.')}
+ else if(a==='accept'){const m=u.items.find(i=>i.id===S.mine),t=S.cur.items.find(i=>i.id===S.sel);if(!m||!t)return;
+  m.st='pend';persist();S.sw={p:S.cur,mine:m,theirs:t};S.req=S.req.filter(x=>x.p!==S.cur.id);
+  S.chat=[{me:false,t:`Chào bạn! Mình đổi ${t.n} lấy ${m.n} nhé. Mình gặp nhau ở trường nhé?`}];S.view='match'}
+ else if(a==='tochat')S.view='chat';
+ else if(a==='loc')S.chat.push({me:true,t:`Mình hẹn ở ${v} nhé.`});
+ else if(a==='done'){const w=S.sw;if(w.st)return;w.st='wait';
+  setTimeout(()=>{w.st='ok';w.mine.st='done';const l=u.pairs[w.p.id],ok=!l||Date.now()-l>2592e6;if(ok){u.total+=50;u.bal+=50;u.pairs[w.p.id]=Date.now()}u.sw++;persist();
+   toast(ok?'Cả hai đã xác nhận. +50 Điểm Xanh!':'Cả hai đã xác nhận. Bạn đã đổi với bạn này trong 30 ngày qua nên chưa cộng thêm Điểm Xanh.');
+   if(S.view==='chat')S.view='rate';render()},1500)}
+ else if(a==='star')S.rt=+v;
+ else if(a==='redeem'){const c=+b.dataset.c;if(u.bal>=c){u.bal-=c;persist();toast(`Đã đổi. Mã QR: UNI-${otp()} (quét tại quầy đối tác)`)}}
+ else if(a==='del'){u.items=u.items.filter(i=>i.id!==b.dataset.id);persist()}
+ else if(a==='evreg'){const i=+b.dataset.i;u.ev=u.ev.includes(i)?u.ev.filter(x=>x!==i):[...u.ev,i];persist();toast(u.ev.includes(i)?'Đã đăng ký tham gia sự kiện.':'Đã hủy đăng ký.')}
+ else if(a==='out'){S.user=null;save('us3_sess',null);A.pg='welcome';A.step='form'}
+ render();
+});
+document.addEventListener('change',e=>{const t=e.target,k=t.dataset.f;
+ if(['fs','fa','fc','fz'].includes(k)){S[k]=t.value;S.fi=0;render()}
+ else if(t.dataset.t!==undefined){const c=[...document.querySelectorAll('[data-t]')];$('#go').disabled=!(c[0].checked&&c[1].checked)}
+ else if(t.id==='ph'){Promise.all([...t.files].slice(0,4).map(shrink)).then(a=>{$('#prev').innerHTML=a.map(s=>`<img src="${s}" alt="Ảnh xem trước" style="width:72px;height:72px;object-fit:cover;border-radius:10px">`).join('')}).catch(()=>{})}});
+document.addEventListener('submit',e=>{
+ e.preventDefault();const f=e.target,k=f.dataset.f,d=Object.fromEntries(new FormData(f)),u=S.user;
+ if(k==='login'){const x=users.find(y=>y.email===d.email.trim().toLowerCase()&&y.pw===d.pw);
+  if(!x)return err('Email hoặc mật khẩu chưa đúng. Nếu chưa có tài khoản, hãy chọn Đăng ký.');
+  S.user=x;save('us3_sess',x.email);S.view='feed';render()}
+ else if(k==='reg'||k==='forgot'){const em=d.email.trim().toLowerCase(),ex=users.some(y=>y.email===em);
+  if(k==='reg'&&ex)return err('Email này đã đăng ký. Hãy chuyển sang Đăng nhập.');
+  if(k==='forgot'&&!ex)return err('Không tìm thấy tài khoản với email này.');
+  if(d.pw.length<6)return err('Mật khẩu cần từ 6 ký tự.');
+  if(d.pw!==d.pw2)return err('Mật khẩu xác nhận chưa khớp.');
+  A.p={school:d.school,name:(d.name||'').trim(),mssv:(d.mssv||'').trim(),email:em,pw:d.pw,reset:k==='forgot'};A.code=otp();A.step='otp';render()}
+ else if(k==='otp'){if(d.o.trim()!==A.code)return err('Mã OTP chưa đúng. Kiểm tra lại hoặc bấm Gửi lại mã.');
+  if(A.p.reset){users.find(y=>y.email===A.p.email).pw=A.p.pw;persist();A.pg='login';A.step='form';render();toast('Đã đổi mật khẩu. Hãy đăng nhập.')}
+  else{const{reset,...r}=A.p,x={...r,total:10,bal:10,items:[],rv:[],pairs:{},ev:[],sw:0,consent:A.agree};A.agree=null;users.push(x);persist();S.user=x;save('us3_sess',x.email);S.view='feed';A.step='form';render();toast('Xác minh thành công! +10 Điểm Xanh')}}
+ else if(k==='search'){S.fq=d.q.trim();S.fi=0;render()}
+ else if(k==='add'){const fl=[...f.elements.ph.files];
+  if(fl.length>4||!fl.every(x=>x.type.startsWith('image/')))return err('Chỉ tải tối đa 4 ảnh (JPG hoặc PNG).');
+  Promise.all(fl.map(shrink)).then(ph=>{u.items.push({id:'u'+Date.now(),n:d.n.trim(),e:d.e,c:'#DDEFE2',s:d.s.trim(),q:d.q.trim(),d:d.d.trim(),w:d.w.trim(),ph,p:0,st:'show'});persist();S.view='closet';render();toast('Đã đăng lên tủ đồ.')}).catch(()=>err('Không đọc được ảnh. Thử ảnh JPG hoặc PNG khác.'))}
+ else if(k==='chat'){S.chat.push({me:true,t:d.t});render();setTimeout(()=>{S.chat.push({me:false,t:'Ok bạn nhé!'});if(S.view==='chat')render()},900)}
+ else if(k==='rate'){if(!S.rt)return err('Hãy chọn số sao.');
+  u.bal+=5;u.total+=5;u.rv.push({n:S.sw.p.name,s:5,t:'Đúng mô tả, đúng hẹn. (nhận xét mẫu)'});S.rt=0;persist();S.view='profile';render();toast('Cảm ơn bạn đã đánh giá! +5 Điểm Xanh')}
+});
+render();
+</script></body></html>
